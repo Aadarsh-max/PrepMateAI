@@ -12,14 +12,19 @@ const ProfileInfoCard = () => {
         navigate("/");
     };
 
+    const getInitials = (name) => {
+        if (!name) return "";
+        const nameParts = name.trim().split(" ");
+        const initials = nameParts.map((part) => part.charAt(0).toUpperCase());
+        return initials.slice(0, 2).join("");
+    };
+
     return (
         user && (
             <div className="flex items-center bg-[#0A081A] px-4 py-2 rounded-xl shadow-lg">
-                <img
-                    src={user.profileImageUrl}
-                    alt="profile"
-                    className="w-11 h-11 rounded-full mr-4 border-2 border-[#3FE1FF]"
-                />
+                <div className="w-11 h-11 rounded-full mr-4 bg-[#3FE1FF] text-black font-bold flex items-center justify-center text-sm">
+                    {getInitials(user.name)}
+                </div>
                 <div>
                     <div className="text-[15px] font-bold leading-5 bg-gradient-to-r from-[#3FE1FF] via-[#9378FF] to-[#DD3EFF] text-transparent bg-clip-text">
                         {user.name || ""}
