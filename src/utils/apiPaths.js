@@ -7,10 +7,6 @@ export const API_PATHS = {
         GET_PROFILE: "/api/auth/profile", //Get user details
     },
 
-    IMAGE: {
-        UPLOAD_IMAGE: "/api/auth/upload-image" //upload profile pic
-    },
-
     AI: {
 
         GENERATE_QUESTIONS: "/api/ai/generate-questions", //generate interview questions & answers
