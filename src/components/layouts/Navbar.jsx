@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between gap-5">
         <Link to="/dashboard">
           <h2 className="text-lg md:text-xl font-semibold bg-gradient-to-r from-[#3FE1FF] via-[#9378FF] to-[#DD3EFF] bg-clip-text text-transparent tracking-tight">
-            Interview Prep AI
+            PrepMate AI
           </h2>
         </Link>
 
