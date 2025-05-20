@@ -1,4 +1,4 @@
-export const BASE_URL = "https://prepai-backend.vercel.app/"; 
+export const BASE_URL = "https://prepai-backend.vercel.app"; 
 
 export const API_PATHS = {
     AUTH:{
