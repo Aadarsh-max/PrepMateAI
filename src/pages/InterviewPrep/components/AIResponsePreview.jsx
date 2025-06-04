@@ -183,40 +183,33 @@ function CodeBlock({ code, language }) {
   };
 
   return (
-    <div className="relative my-6 rounded-lg overflow-hidden bg-blue-900 border border-pink-600 shadow-lg shadow-pink-500/20">
-      <div className="flex items-center justify-between px-4 py-2 bg-blue-800 border-b border-pink-600">
-        <div className="flex items-center space-x-2">
-          <LuCode size={16} className="text-pink-400" />
-          <span className="text-xs font-semibold text-pink-400 uppercase tracking-wide">
-            {language || "Code"}
-          </span>
-        </div>
+    <div className="relative my-4 rounded border border-white bg-black">
+      <div className="flex items-center justify-between px-3 py-2 border-b border-white">
+        <span className="text-xs text-white uppercase tracking-wide">
+          {language || "Code"}
+        </span>
         <button
           onClick={copyCode}
-          className="cursor-pointer bg-black text-white px-2 py-1 rounded text-sm hover:bg-white hover:text-black transition-colors focus:outline-none relative group"
+          className="text-white text-xs px-2 py-1 border border-white rounded hover:bg-white hover:text-black transition"
           aria-label="Copy code"
         >
-          {copied ? (
-            <LuCheck size={16} className="text-black" />
-          ) : (
-            <LuCopy size={16} />
-          )}
-          {copied && (
-            <span className="absolute -top-8 right-0 bg-black text-white text-xs rounded-md px-2 py-1 opacity-80 group-hover:opacity-100 transition border border-white">
-              Copied!
-            </span>
-          )}
+          {copied ? "Copied" : "Copy"}
         </button>
       </div>
-
       <SyntaxHighLighter
         language={language}
-        style={atomDark}
+        style={{
+          hljs: {
+            background: "black",
+            color: "white",
+          },
+        }}
         customStyle={{
           fontSize: 12.5,
           margin: 0,
           padding: "1rem",
-          background: "transparent",
+          background: "black",
+          color: "white",
         }}
       >
         {code}

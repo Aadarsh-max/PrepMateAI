@@ -21,17 +21,17 @@ const ProfileInfoCard = () => {
 
   return (
     user && (
-      <div className="flex items-center bg-black px-4 py-2 rounded-xl shadow-md border border-white/10">
-        <div className="w-11 h-11 rounded-full mr-4 bg-white text-black font-bold flex items-center justify-center text-sm">
+      <div className="flex items-center gap-3 bg-black px-3 py-1.5 rounded-xl shadow-md border border-white/10 h-12">
+        <div className="w-9 h-9 rounded-full bg-white text-black font-bold flex items-center justify-center text-sm">
           {getInitials(user.name)}
         </div>
-        <div>
-          <div className="text-white text-[15px] font-semibold leading-5">
+        <div className="flex flex-col justify-center leading-tight">
+          <span className="text-white text-sm font-semibold">
             {user.name || ""}
-          </div>
+          </span>
           <button
             onClick={handleLogout}
-            className="text-sm font-medium text-gray-300 hover:text-white hover:underline transition"
+            className="text-xs font-medium text-gray-400 hover:text-white transition"
           >
             Logout
           </button>
