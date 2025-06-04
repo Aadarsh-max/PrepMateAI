@@ -14,43 +14,166 @@ const Login = ({ setCurrentPage }) => {
   const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  //Handle Login Form Submit
+ 
+  const logEvent = (level, message, data = {}) => {
+    const timestamp = new Date().toISOString();
+    const logEntry = {
+      timestamp,
+      level,
+      component: "Login",
+      message,
+      ...data,
+    };
+
+    console.log(
+      `[${level.toUpperCase()}] ${timestamp} - Login Component: ${message}`,
+      data
+    );
+  };
+  React.useEffect(() => {
+    logEvent("info", "Login component mounted");
+
+    return () => {
+      logEvent("info", "Login component unmounted");
+    };
+  }, []);
+
+  const handleEmailChange = ({ target }) => {
+    const newEmail = target.value;
+    logEvent("debug", "Email input changed", {
+      emailLength: newEmail.length,
+      hasAtSymbol: newEmail.includes("@"),
+    });
+    setEmail(newEmail);
+  };
+
+  const handlePasswordChange = ({ target }) => {
+    const newPassword = target.value;
+    logEvent("debug", "Password input changed", {
+      passwordLength: newPassword.length,
+      hasMinLength: newPassword.length >= 8,
+    });
+    setPassword(newPassword);
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    logEvent("info", "Login form submitted", {
+      email: email,
+      hasPassword: !!password,
+    });
+
     if (!validateEmail(email)) {
+      logEvent("warning", "Email validation failed", {
+        email: email,
+        reason: "Invalid email format",
+      });
       setError("Please enter a valid email address.");
       return;
     }
 
+    logEvent("debug", "Email validation passed", { email: email });
+
     if (!password) {
+      logEvent("warning", "Password validation failed", {
+        reason: "Password is empty",
+      });
       setError("Please enter the password");
       return;
     }
 
+    logEvent("debug", "Password validation passed");
     setError("");
 
     //Login API Call
     try {
+      logEvent("info", "Starting login API call", {
+        endpoint: API_PATHS.AUTH.LOGIN,
+        email: email,
+      });
+
+      const startTime = performance.now();
+
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
         password,
       });
 
+      const endTime = performance.now();
+      const apiCallDuration = endTime - startTime;
+
+      logEvent("info", "Login API call successful", {
+        responseStatus: response.status,
+        responseStatusText: response.statusText,
+        apiCallDuration: `${apiCallDuration.toFixed(2)}ms`,
+        hasToken: !!response.data?.token,
+        responseDataKeys: Object.keys(response.data || {}),
+      });
+
       const { token } = response.data;
 
       if (token) {
+        logEvent("info", "Token received, storing in localStorage", {
+          tokenLength: token.length,
+          tokenPrefix: token.substring(0, 10) + "...",
+        });
+
         localStorage.setItem("token", token);
+
+        logEvent("info", "Updating user context", {
+          userData: {
+            ...response.data,
+            token: "[REDACTED]", 
+          },
+        });
+
         updateUser(response.data);
+
+        logEvent("info", "Navigating to dashboard");
         navigate("/dashboard");
+
+        logEvent("success", "Login process completed successfully");
+      } else {
+        logEvent("error", "No token received in response", {
+          responseData: response.data,
+        });
+        setError("Login failed. No authentication token received.");
       }
     } catch (error) {
+      const endTime = performance.now();
+
+      logEvent("error", "Login API call failed", {
+        error: error.message,
+        errorStack: error.stack,
+        responseStatus: error.response?.status,
+        responseStatusText: error.response?.statusText,
+        responseData: error.response?.data,
+        requestConfig: {
+          url: error.config?.url,
+          method: error.config?.method,
+          timeout: error.config?.timeout,
+        },
+      });
+
       if (error.response && error.response.data.message) {
+        logEvent("warning", "Setting error message from API response", {
+          errorMessage: error.response.data.message,
+        });
         setError(error.response.data.message);
       } else {
+        logEvent("warning", "Setting generic error message", {
+          originalError: error.message,
+        });
         setError("Something went wrong. Please try again.");
       }
     }
+  };
+
+  // Navigation logging
+  const handleSignUpClick = () => {
+    logEvent("info", "User clicked SignUp button");
+    setCurrentPage("signup");
   };
 
   return (
@@ -66,7 +189,7 @@ const Login = ({ setCurrentPage }) => {
       <form onSubmit={handleLogin}>
         <Input
           value={email}
-          onChange={({ target }) => setEmail(target.value)}
+          onChange={handleEmailChange}
           label="Email Address"
           placeholder="john@example.com"
           type="text"
@@ -75,7 +198,7 @@ const Login = ({ setCurrentPage }) => {
 
         <Input
           value={password}
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={handlePasswordChange}
           label="Password"
           placeholder="Min 8 Characters"
           type="password"
@@ -95,7 +218,7 @@ const Login = ({ setCurrentPage }) => {
           Don't have an account?{" "}
           <button
             className="font-medium underline cursor-pointer text-white hover:text-gray-200 transition"
-            onClick={() => setCurrentPage("signup")}
+            onClick={handleSignUpClick}
             type="button"
           >
             SignUp
