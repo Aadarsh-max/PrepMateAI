@@ -71,7 +71,7 @@ const CreateSessionForm = () => {
   return (
     <div
       className="max-w-[750px] w-full mx-auto p-10 flex flex-col justify-center
-               bg-black rounded-xl shadow-md text-white"
+               bg-black rounded-xl shadow-md text-white border border-white"
     >
       <h3 className="text-xl font-semibold text-white">
         Start a New Interview Journey

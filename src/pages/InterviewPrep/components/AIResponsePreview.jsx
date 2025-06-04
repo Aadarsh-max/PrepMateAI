@@ -8,7 +8,7 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 const AIResponsePreview = ({ content }) => {
   if (!content) return null;
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto bg-black text-white">
       <div className="text-[14px] prose prose-invert max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -22,10 +22,11 @@ const AIResponsePreview = ({ content }) => {
                 <CodeBlock
                   code={String(children).replace(/\n$/, "")}
                   language={language}
+                  className="bg-white text-black rounded px-2 py-1 font-mono"
                 />
               ) : (
                 <code
-                  className="px-1 py-0.5 bg-blue-900 text-pink-400 rounded text-sm"
+                  className="px-1 py-0.5 bg-white text-black rounded text-sm"
                   {...props}
                 >
                   {children}
@@ -33,24 +34,26 @@ const AIResponsePreview = ({ content }) => {
               );
             },
             p({ children }) {
-              return <p className="mb-4 leading-5 text-blue-100">{children}</p>;
+              return <p className="mb-4 leading-6 text-white">{children}</p>;
             },
             strong({ children }) {
-              return <strong className="text-pink-500">{children}</strong>;
+              return (
+                <strong className="font-semibold text-white">{children}</strong>
+              );
             },
             em({ children }) {
-              return <em className="text-blue-300">{children}</em>;
+              return <em className="italic text-gray-300">{children}</em>;
             },
             ul({ children }) {
               return (
-                <ul className="list-disc pl-6 space-y-2 my-4 text-blue-100">
+                <ul className="list-disc pl-6 space-y-2 my-4 text-white">
                   {children}
                 </ul>
               );
             },
             ol({ children }) {
               return (
-                <ol className="list-decimal pl-6 space-y-2 my-4 text-blue-100">
+                <ol className="list-decimal pl-6 space-y-2 my-4 text-white">
                   {children}
                 </ol>
               );
@@ -60,42 +63,47 @@ const AIResponsePreview = ({ content }) => {
             },
             blockquote({ children }) {
               return (
-                <blockquote className="border-l-4 border-pink-500 pl-4 italic my-4 text-blue-200">
+                <blockquote className="border-l-4 border-white pl-4 italic my-4 text-gray-300">
                   {children}
                 </blockquote>
               );
             },
             h1({ children }) {
               return (
-                <h1 className="text-2xl font-bold mt-6 mb-4 text-pink-400">
+                <h1 className="text-2xl font-bold mt-6 mb-4 text-white">
                   {children}
                 </h1>
               );
             },
             h2({ children }) {
               return (
-                <h2 className="text-xl font-bold mt-6 mb-3 text-pink-400">
+                <h2 className="text-xl font-bold mt-6 mb-3 text-white">
                   {children}
                 </h2>
               );
             },
             h3({ children }) {
               return (
-                <h3 className="text-lg font-bold mt-5 mb-2 text-pink-400">
+                <h3 className="text-lg font-bold mt-5 mb-2 text-white">
                   {children}
                 </h3>
               );
             },
             h4({ children }) {
               return (
-                <h4 className="text-base font-bold mt-4 mb-2 text-pink-400">
+                <h4 className="text-base font-bold mt-4 mb-2 text-white">
                   {children}
                 </h4>
               );
             },
-            a({ children }) {
+            a({ children, href }) {
               return (
-                <a className="text-pink-400 hover:text-pink-300 hover:underline">
+                <a
+                  href={href}
+                  className="text-white underline hover:text-gray-300"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {children}
                 </a>
               );
@@ -103,18 +111,18 @@ const AIResponsePreview = ({ content }) => {
             table({ children }) {
               return (
                 <div className="overflow-x-auto my-4">
-                  <table className="min-w-full divide-y divide-blue-700 border border-blue-800">
+                  <table className="min-w-full divide-y divide-gray-700 border border-gray-700">
                     {children}
                   </table>
                 </div>
               );
             },
             thead({ children }) {
-              return <thead className="bg-blue-900">{children}</thead>;
+              return <thead className="bg-gray-900">{children}</thead>;
             },
             tbody({ children }) {
               return (
-                <tbody className="divide-y divide-blue-800">{children}</tbody>
+                <tbody className="divide-y divide-gray-700">{children}</tbody>
               );
             },
             tr({ children }) {
@@ -122,28 +130,38 @@ const AIResponsePreview = ({ content }) => {
             },
             th({ children }) {
               return (
-                <th className="px-3 py-2 text-left text-xs font-medium text-pink-400 uppercase tracking-wider">
+                <th className="px-3 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
                   {children}
                 </th>
               );
             },
             td({ children }) {
               return (
-                <td className="px-3 py-2 whitespace-nowrap text-sm text-blue-100">
+                <td className="px-3 py-2 whitespace-nowrap text-sm text-white">
                   {children}
                 </td>
               );
             },
             hr() {
-              return <hr className="my-6 border-pink-500" />;
+              return <hr className="my-6 border-white" />;
             },
             img({ src, alt }) {
               return (
                 <img
                   src={src}
                   alt={alt}
-                  className="my-4 max-w-full rounded border-2 border-pink-500"
+                  className="my-4 max-w-full rounded border border-white"
                 />
+              );
+            },
+            button({ children, ...props }) {
+              return (
+                <button
+                  className="bg-white text-black px-3 py-1 rounded cursor-pointer hover:bg-gray-300"
+                  {...props}
+                >
+                  {children}
+                </button>
               );
             },
           }}
