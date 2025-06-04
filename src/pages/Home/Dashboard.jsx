@@ -58,7 +58,7 @@ const Dashboard = () => {
           {sessions?.map((data, index) => (
             <SummaryCard
               key={data?._id}
-              colors={CARD_BG[index % CARD_BG.length]}
+              colors="bg-white bg-opacity-5" // subtle white background with opacity
               role={data?.role || ""}
               topicsToFocus={data?.topicsToFocus || ""}
               experience={data?.experience || "-"}
@@ -77,10 +77,8 @@ const Dashboard = () => {
 
         <button
           className="fixed bottom-10 md:bottom-20 right-10 md:right-20 h-12 md:h-12 flex items-center justify-center gap-3
-             bg-gradient-to-r from-[#38bdf8] via-[#60a5fa] to-[#818cf8]
-             text-white text-sm font-semibold px-7 py-2.5 rounded-full
-             shadow-[0_0_20px_rgba(129,140,248,0.3)] hover:shadow-[0_0_30px_rgba(96,165,250,0.5)]
-             transition-all duration-300 cursor-pointer"
+                   bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-full
+                   shadow-md hover:shadow-lg transition duration-300 cursor-pointer"
           onClick={() => setOpenCreateModal(true)}
           aria-label="Add New Session"
         >
@@ -93,6 +91,7 @@ const Dashboard = () => {
         isOpen={openCreateModal}
         onClose={() => setOpenCreateModal(false)}
         hideHeader
+        className="bg-black text-white"
       >
         <div className="max-w-md mx-auto px-4">
           <CreateSessionForm />
@@ -103,6 +102,7 @@ const Dashboard = () => {
         isOpen={openDeleteAlert?.open}
         onClose={() => setOpenDeleteAlert({ open: false, data: null })}
         title="Delete Alert"
+        className="bg-black text-white"
       >
         <div className="max-w-sm mx-auto px-4">
           <DeleteAlertContent

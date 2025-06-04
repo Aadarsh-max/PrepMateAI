@@ -4,37 +4,44 @@
 @theme {
   --font-display: "Urbanist", sans-serif;
   --breakpoint-3xl: 1920px;
-  --color-primary: #3fe1ff;
+  --color-primary: #000000; /* Primary black */
 }
 
 @layer base {
   html {
     font-family: var(--font-display);
+    background-color: #000000; /* Pure black background */
+    color: #ffffff; /* White text */
   }
 
   body {
-    background-color: #0a081a; /* Dark Navy background */
+    background-color: #000000; /* Pure black */
     overflow-x: hidden;
-    color: #ffffff; /* White text for contrast */
+    color: #ffffff; /* White text */
+  }
+
+  /* All buttons cursor pointer */
+  button {
+    cursor: pointer;
   }
 }
 
-/* Custom scrollbar styling - neon accent */
+/* Custom scrollbar styling - simple black & white */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3fe1ff, #dd3eff);
+  background: #ffffff; /* White thumb */
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+  background: #000000; /* Black track */
 }
 
 @layer utilities {
-  /* Shine effect */
+  /* Shine effect - simplified to grayscale */
   @keyframes text-shine {
     0% {
       background-position: -200% center;
@@ -45,18 +52,18 @@
   }
 
   .animate-text-shine {
-    background: linear-gradient(90deg, #3fe1ff, #9378ff, #dd3eff);
+    background: linear-gradient(90deg, #ffffff 0%, #cccccc 50%, #ffffff 100%);
     background-size: 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: text-shine 2.5s linear infinite;
   }
 
-  /* Blob animations remain unchanged */
+  /* Blob animations with grayscale */
   @keyframes blob1 {
     0%,
     100% {
-      transform: translate(0px, 0px) scale(1);
+      transform: translate(0, 0) scale(1);
     }
     33% {
       transform: translate(30px, -60px) scale(1.1);
@@ -69,7 +76,7 @@
   @keyframes blob2 {
     0%,
     100% {
-      transform: translate(0px, 0px) scale(1);
+      transform: translate(0, 0) scale(1);
     }
     33% {
       transform: translate(-40px, 60px) scale(1.05);
@@ -82,7 +89,7 @@
   @keyframes blob3 {
     0%,
     100% {
-      transform: translate(0px, 0px) scale(1);
+      transform: translate(0, 0) scale(1);
     }
     33% {
       transform: translate(20px, 140px) scale(1.15);
@@ -95,11 +102,11 @@
   @keyframes heartbeatGlow {
     0%,
     100% {
-      text-shadow: 0 0 10px #44caff, 0 0 20px #44e0ff, 0 0 30px #44fff3;
+      text-shadow: 0 0 10px #ffffff, 0 0 20px #cccccc, 0 0 30px #aaaaaa;
       opacity: 1;
     }
     50% {
-      text-shadow: 0 0 2px #44daff, 0 0 4px #44caff;
+      text-shadow: 0 0 2px #cccccc, 0 0 4px #ffffff;
       opacity: 0.6;
     }
   }
@@ -117,21 +124,36 @@
   }
 }
 
-/* INPUT BOX */
+/* INPUT BOX - minimal black & white */
 .input-box {
-  @apply w-full flex justify-between gap-3 text-sm text-white bg-[#151127] rounded px-4 py-3 mb-4 mt-3 border border-[#333] outline-none focus-within:border-[#3FE1FF];
+  @apply w-full flex justify-between gap-3 text-sm text-white
+         bg-black rounded px-4 py-3 mb-4 mt-3 border border-white outline-none
+         focus-within:border-white;
 }
 
-/* BUTTON PRIMARY */
+/* BUTTON PRIMARY - minimal black & white */
 .btn-primary {
-  @apply w-full flex items-center justify-center gap-3 text-sm font-medium text-[#000822] bg-gradient-to-r from-[#3FE1FF] via-[#9378FF] to-[#DD3EFF] shadow-lg p-[10px] rounded-md my-1 hover:bg-black hover:text-white cursor-pointer transition-all hover:shadow-[0_0_15px_rgba(63,225,255,0.5)];
+  @apply w-full flex items-center justify-center gap-3 text-sm font-medium
+         bg-white text-black rounded-md p-2 my-1 border border-black
+         transition-colors duration-200;
 }
 
-/* BUTTON SMALL */
-.btn-small {
-  @apply flex items-center justify-center gap-3 bg-gradient-to-r from-[#3FE1FF] to-[#DD3EFF] text-sm font-semibold text-[#000822] px-7 py-2 rounded-lg hover:bg-black hover:text-white transition-colors cursor-pointer hover:shadow-[0_0_10px_#3FE1FF];
+.btn-primary:hover {
+  @apply bg-black text-white shadow-md border-white;
 }
+
+/* BUTTON SMALL - minimal black & white */
+.btn-small {
+  @apply flex items-center justify-center gap-3 bg-white text-black
+         text-sm font-semibold px-6 py-2 rounded-lg border border-black
+         transition-colors duration-200;
+}
+
+.btn-small:hover {
+  @apply bg-black text-white shadow-sm border-white;
+}
+
 .glow-text {
-  color: #84fcf0;
+  color: #ffffff;
   animation: heartbeatGlow 2.5s infinite;
 }

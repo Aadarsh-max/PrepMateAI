@@ -25,17 +25,17 @@ const QuestionCard = ({
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
     };
-    return (
+return (
   <>
-    <div className="bg-[#0A081A] rounded-lg mb-4 overflow-hidden py-4 px-5 shadow-glow border border-[#DD3EFF]/50 group">
+    <div className="bg-black border border-white/10 rounded-lg mb-4 overflow-hidden py-4 px-5 shadow-sm group">
       <div className="flex items-start justify-between cursor-pointer">
         <div className="flex items-start gap-3.5">
-          <span className="text-xs md:text-[15px] font-semibold text-[#3FE1FF] leading-[18px]">
+          <span className="text-xs md:text-sm font-semibold text-white leading-[18px]">
             Q
           </span>
 
           <h3
-            className="text-xs md:text-[14px] font-medium bg-gradient-to-r from-[#3FE1FF] via-[#9378FF] to-[#DD3EFF] bg-clip-text text-transparent mr-0 md:mr-20"
+            className="text-xs md:text-sm font-medium text-white mr-0 md:mr-20"
             onClick={toggleExpand}
           >
             {question}
@@ -49,7 +49,7 @@ const QuestionCard = ({
             }`}
           >
             <button
-              className="flex items-center gap-2 text-xs font-medium text-white bg-[#0A081A] px-3 py-1 mr-2 rounded border border-[#3FE1FF] hover:bg-[#3FE1FF] hover:text-[#000822] shadow-[0_0_8px_#3FE1FF] transition"
+              className="flex items-center gap-2 text-xs font-medium text-white bg-black px-3 py-1 mr-2 rounded border border-white/20 hover:bg-white hover:text-black transition"
               onClick={onTogglePin}
             >
               {isPinned ? (
@@ -60,19 +60,19 @@ const QuestionCard = ({
             </button>
 
             <button
-              className="flex items-center gap-2 text-xs font-medium text-white bg-[#0A081A] px-3 py-1 mr-2 rounded border border-[#DD3EFF] hover:bg-[#DD3EFF] hover:text-[#000822] shadow-[0_0_8px_#DD3EFF] transition"
+              className="flex items-center gap-2 text-xs font-medium text-white bg-black px-3 py-1 mr-2 rounded border border-white/20 hover:bg-white hover:text-black transition"
               onClick={() => {
                 setIsExpanded(true);
                 onLearnMore();
               }}
             >
               <LuSparkles />
-              <span className="hidden md:block"> Learn More </span>
+              <span className="hidden md:block">Learn More</span>
             </button>
           </div>
 
           <button
-            className="text-[#3FE1FF] hover:text-[#DD3EFF] cursor-pointer transition-colors"
+            className="text-white hover:text-gray-300 cursor-pointer transition-colors"
             onClick={toggleExpand}
           >
             <LuChevronDown
@@ -91,7 +91,7 @@ const QuestionCard = ({
       >
         <div
           ref={contentRef}
-          className="mt-4 text-[#B0B0C0] bg-[#0A081A]/80 px-5 py-3 rounded-lg shadow-[0_0_8px_#3FE1FF]"
+          className="mt-4 text-gray-300 bg-white/5 px-5 py-3 rounded-lg"
         >
           <AIResponsePreview content={answer} />
         </div>

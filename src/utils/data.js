@@ -1,15 +1,15 @@
 
 export const CARD_BG = [
-  { id: 1, bgcolor: 'linear-gradient(135deg, #16202a 0%, #1f2235 100%)' }, // Subtle Dark Navy
-  { id: 2, bgcolor: 'linear-gradient(135deg, #2a3b4c 0%, #3b4d61 100%)' }, // Dark Navy to Cool Gray
-  { id: 3, bgcolor: 'linear-gradient(135deg, #2e3f57 0%, #4a4e75 100%)' }, // Cyan hint to Soft Purple
-  { id: 4, bgcolor: 'linear-gradient(135deg, #1f1c33 0%, #372b52 100%)' }, // Dark Navy to Muted Magenta
-  { id: 5, bgcolor: 'linear-gradient(135deg, #27384e 0%, #3a3f68 100%)' }, // Cyan Blue toned down
-  { id: 6, bgcolor: 'linear-gradient(135deg, #2b2b3c 0%, #383850 100%)' }, // Neutral soft dark
-  { id: 7, bgcolor: 'linear-gradient(135deg, #212336 0%, #3d3567 100%)' }, // Purple hint subtle
-  { id: 8, bgcolor: 'linear-gradient(135deg, #1d2735 0%, #2f3b50 100%)' }, // Cool tinted dark
-  { id: 9, bgcolor: 'linear-gradient(135deg, #2f2c4f 0%, #463c6a 100%)' }, // Deep muted purple
-  { id: 10, bgcolor: 'linear-gradient(135deg, #1f1f2b 0%, #332a46 100%)' }, // Magenta hint soft
+  { id: 1, bgcolor: 'black' }, 
+  { id: 2, bgcolor: 'black' }, 
+  { id: 3, bgcolor: 'black' },
+  { id: 4, bgcolor: 'black' },
+  { id: 5, bgcolor: 'black' }, 
+  { id: 6, bgcolor: 'black' }, 
+  { id: 7, bgcolor: 'black' }, 
+  { id: 8, bgcolor: 'black' }, 
+  { id: 9, bgcolor: 'black' }, 
+  { id: 10, bgcolor: 'black' },
 ];
 
 

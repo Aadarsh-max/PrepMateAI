@@ -71,13 +71,12 @@ const CreateSessionForm = () => {
   return (
     <div
       className="max-w-[750px] w-full mx-auto p-10 flex flex-col justify-center
-               bg-[#0A081A] rounded-xl shadow-[0_0_25px_rgba(63,225,255,0.1)]
-               text-white"
+               bg-black rounded-xl shadow-md text-white"
     >
-      <h3 className="text-xl font-semibold text-[#3FE1FF]">
+      <h3 className="text-xl font-semibold text-white">
         Start a New Interview Journey
       </h3>
-      <p className="text-sm text-[#B0B0C0] mt-2 mb-6 leading-relaxed">
+      <p className="text-sm text-gray-400 mt-2 mb-6 leading-relaxed">
         Fill out a few quick details and unlock your personalized set of
         interview questions!
       </p>
@@ -89,7 +88,7 @@ const CreateSessionForm = () => {
           label="Target Role"
           placeholder="(e.g., Frontend Developer, UI/UX Designer, etc.)"
           type="text"
-          className="text-white placeholder-[#B0B0C0] bg-[#0A081A] border border-[#3FE1FF] rounded-md px-4 py-3 w-full"
+          className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-4 py-3 w-full"
         />
 
         <Input
@@ -98,7 +97,7 @@ const CreateSessionForm = () => {
           label="Years of Experience"
           placeholder="(e.g., 1 year, 3 years, 5+ years)"
           type="number"
-          className="text-white placeholder-[#B0B0C0] bg-[#0A081A] border border-[#3FE1FF] rounded-md px-4 py-3 w-full"
+          className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-4 py-3 w-full"
         />
 
         <Input
@@ -107,7 +106,7 @@ const CreateSessionForm = () => {
           label="Topics to Focus On"
           placeholder="(Comma-separated, e.g., React, Node.js, MongoDB)"
           type="text"
-          className="text-white placeholder-[#B0B0C0] bg-[#0A081A] border border-[#3FE1FF] rounded-md px-4 py-3 w-full"
+          className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-4 py-3 w-full"
         />
 
         <Input
@@ -116,16 +115,15 @@ const CreateSessionForm = () => {
           label="Description"
           placeholder="(Any specific goals or notes for this session)"
           type="text"
-          className="text-white placeholder-[#B0B0C0] bg-[#0A081A] border border-[#3FE1FF] rounded-md px-4 py-3 w-full"
+          className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-4 py-3 w-full"
         />
 
-        {error && <p className="text-pink-500 text-sm pb-2">{error}</p>}
+        {error && <p className="text-red-500 text-sm pb-2">{error}</p>}
 
         <button
           type="submit"
-          className="w-full py-3 mt-4 font-semibold rounded-md
-                   bg-gradient-to-r from-[#3FE1FF] via-[#9378FF] to-[#DD3EFF]
-                   text-[#000822] hover:brightness-110 transition flex justify-center items-center gap-2"
+          className="w-full py-3 mt-4 font-semibold rounded-md bg-white text-black
+                   hover:bg-gray-200 transition flex justify-center items-center gap-2 cursor-pointer"
           disabled={isLoading}
         >
           {isLoading && <SpinnerLoader />}

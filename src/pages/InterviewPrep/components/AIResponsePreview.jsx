@@ -1,26 +1,26 @@
 import React, { useState } from "react";
-import {LuCopy, LuCheck, LuCode } from "react-icons/lu";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import {Prism as SyntaxHighLighter} from 'react-syntax-highlighter';
+import { LuCopy, LuCheck, LuCode } from "react-icons/lu";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighLighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-const AIResponsePreview = ({content}) => {
-    if(!content) return null
-      return (
+const AIResponsePreview = ({ content }) => {
+  if (!content) return null;
+  return (
     <div className="max-w-4xl mx-auto">
       <div className="text-[14px] prose prose-invert max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
             code({ node, className, children, ...props }) {
-              const match = /language-(\w+)/.exec(className || '');
-              const language = match ? match[1] : '';
+              const match = /language-(\w+)/.exec(className || "");
+              const language = match ? match[1] : "";
               const isInline = !className;
 
               return !isInline ? (
                 <CodeBlock
-                  code={String(children).replace(/\n$/, '')}
+                  code={String(children).replace(/\n$/, "")}
                   language={language}
                 />
               ) : (
@@ -33,9 +33,7 @@ const AIResponsePreview = ({content}) => {
               );
             },
             p({ children }) {
-              return (
-                <p className="mb-4 leading-5 text-blue-100">{children}</p>
-              );
+              return <p className="mb-4 leading-5 text-blue-100">{children}</p>;
             },
             strong({ children }) {
               return <strong className="text-pink-500">{children}</strong>;
@@ -155,7 +153,7 @@ const AIResponsePreview = ({content}) => {
       </div>
     </div>
   );
-}
+};
 
 function CodeBlock({ code, language }) {
   const [copied, setCopied] = useState(false);
@@ -172,21 +170,21 @@ function CodeBlock({ code, language }) {
         <div className="flex items-center space-x-2">
           <LuCode size={16} className="text-pink-400" />
           <span className="text-xs font-semibold text-pink-400 uppercase tracking-wide">
-            {language || 'Code'}
+            {language || "Code"}
           </span>
         </div>
         <button
           onClick={copyCode}
-          className="text-blue-300 hover:text-pink-400 focus:outline-none relative group"
+          className="cursor-pointer bg-black text-white px-2 py-1 rounded text-sm hover:bg-white hover:text-black transition-colors focus:outline-none relative group"
           aria-label="Copy code"
         >
           {copied ? (
-            <LuCheck size={16} className="text-pink-500" />
+            <LuCheck size={16} className="text-black" />
           ) : (
             <LuCopy size={16} />
           )}
           {copied && (
-            <span className="absolute -top-8 right-0 bg-blue-900 text-pink-400 text-xs rounded-md px-2 py-1 opacity-80 group-hover:opacity-100 transition border border-pink-500">
+            <span className="absolute -top-8 right-0 bg-black text-white text-xs rounded-md px-2 py-1 opacity-80 group-hover:opacity-100 transition border border-white">
               Copied!
             </span>
           )}
@@ -199,8 +197,8 @@ function CodeBlock({ code, language }) {
         customStyle={{
           fontSize: 12.5,
           margin: 0,
-          padding: '1rem',
-          background: 'transparent',
+          padding: "1rem",
+          background: "transparent",
         }}
       >
         {code}

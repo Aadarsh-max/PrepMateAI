@@ -148,12 +148,7 @@ const InterviewPrep = () => {
       />
 
       <div className="container mx-auto pt-4 pb-4 px-4 md:px-0">
-        <h2
-          className="text-lg font-semibold mb-6"
-          style={{
-            color: "#FFFFFF", // white text default
-          }}
-        >
+        <h2 className="text-lg font-semibold mb-6 text-white">
           Interview Q & A
         </h2>
 
@@ -197,14 +192,9 @@ const InterviewPrep = () => {
                         sessionData?.questions?.length === index + 1 && (
                           <div className="flex items-center justify-center mt-5">
                             <button
-                              className={`flex items-center gap-3 text-sm font-medium px-5 py-2 mr-2 rounded cursor-pointer transition-all duration-200 border`}
+                              className="flex items-center gap-3 text-sm font-medium px-5 py-2 mr-2 rounded border border-white bg-white text-black cursor-pointer transition-colors duration-200 hover:bg-black hover:text-white"
                               disabled={isLoading || isUpdateLoader}
                               onClick={uploadMoreQuestions}
-                              style={{
-                                backgroundColor: "#0DC6FF", // Cyan default
-                                color: "#000822", // Dark text
-                                borderColor: "#0DC6FF", // Cyan border
-                              }}
                             >
                               {isUpdateLoader ? (
                                 <SpinnerLoader />
@@ -231,8 +221,8 @@ const InterviewPrep = () => {
           >
             {errorMsg && (
               <p
-                className="flex gap-2 text-sm font-medium"
-                style={{ color: "#DD7600" /* amber-ish text for warnings */ }}
+                className="flex gap-2 text-sm font-medium text-yellow-600"
+                // amber-ish color, keep or change if you want
               >
                 <LuCircleAlert className="mt-1" /> {errorMsg}
               </p>
@@ -241,8 +231,7 @@ const InterviewPrep = () => {
             {!isLoading && explanation && (
               <AIResponsePreview
                 content={explanation?.explanation}
-                // AIResponsePreview can also be styled internally with:
-                // bg: #0DC6FF (AI Tag BG), text: #000822 (dark blue)
+                // style AIResponsePreview internally if needed
               />
             )}
           </Drawer>
