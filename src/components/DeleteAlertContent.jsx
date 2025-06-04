@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { AlertTriangle, Trash2 } from "lucide-react";
 
 const DeleteAlertContent = ({ content, onDelete }) => {
-  const handleDelete = () => {
-    console.log("Deleting..."); 
-    onDelete(); 
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    console.log("Deleting...");
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    onDelete();
+    setIsDeleting(false);
   };
 
   return (
@@ -25,10 +32,21 @@ const DeleteAlertContent = ({ content, onDelete }) => {
         <button
           type="button"
           onClick={handleDelete}
-          className="px-4 py-2 rounded-md text-sm font-medium bg-red-600 hover:bg-red-700 text-white transition-all duration-200 cursor-pointer flex items-center gap-2 hover:shadow-lg hover:shadow-red-600/25"
+          disabled={isDeleting}
+          className={`px-4 py-2 rounded-md text-sm font-medium ${
+            isDeleting ? "bg-gray-600" : "bg-red-600 hover:bg-red-700"
+          } text-white transition-all duration-200 cursor-pointer flex items-center gap-2 hover:shadow-lg hover:shadow-red-600/25`}
         >
-          <Trash2 size={16} />
-          Delete
+          {isDeleting ? (
+            <>
+              <span className="animate-pulse">Deleting...</span>
+            </>
+          ) : (
+            <>
+              <Trash2 size={16} />
+              Delete
+            </>
+          )}
         </button>
       </div>
     </div>
