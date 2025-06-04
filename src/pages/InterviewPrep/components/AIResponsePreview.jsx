@@ -2,8 +2,52 @@ import React, { useState } from "react";
 import { LuCopy, LuCheck, LuCode } from "react-icons/lu";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Prism as SyntaxHighLighter } from "react-syntax-highlighter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+// Move CodeBlock ABOVE the component that uses it
+function CodeBlock({ code, language }) {
+  const [copied, setCopied] = useState(false);
+
+  const copyCode = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="relative my-6 rounded-md border border-gray-200 bg-[#f9f9f9] overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-2 bg-gray-100 border-b border-gray-200">
+        <span className="text-xs font-medium text-gray-700 uppercase tracking-wide">
+          {language || "Code"}
+        </span>
+        <button
+          onClick={copyCode}
+          className="text-xs px-2 py-1 border border-gray-400 rounded hover:bg-gray-800 hover:text-white transition"
+          aria-label="Copy code"
+        >
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+
+      {/* Code Section */}
+      <div className="overflow-x-auto text-sm">
+        <SyntaxHighlighter
+          language={language}
+          style={oneLight}
+          customStyle={{
+            margin: 0,
+            padding: "1rem",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          {code}
+        </SyntaxHighlighter>
+      </div>
+    </div>
+  );
+}
 
 const AIResponsePreview = ({ content }) => {
   if (!content) return null;
@@ -16,7 +60,9 @@ const AIResponsePreview = ({ content }) => {
             code({ node, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || "");
               const language = match ? match[1] : "";
-              const isInline = !className;
+              const isInline = !(
+                className && className.startsWith("language-")
+              );
 
               return !isInline ? (
                 <CodeBlock
@@ -172,48 +218,5 @@ const AIResponsePreview = ({ content }) => {
     </div>
   );
 };
-
-function CodeBlock({ code, language }) {
-  const [copied, setCopied] = useState(false);
-
-  const copyCode = () => {
-    navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <div className="relative my-6 rounded-md border border-gray-200 bg-[#f9f9f9] overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-100 border-b border-gray-200">
-        <span className="text-xs font-medium text-gray-700 uppercase tracking-wide">
-          {language || "Code"}
-        </span>
-        <button
-          onClick={copyCode}
-          className="text-xs px-2 py-1 border border-gray-400 rounded hover:bg-gray-800 hover:text-white transition"
-          aria-label="Copy code"
-        >
-          {copied ? "Copied" : "Copy"}
-        </button>
-      </div>
-
-      {/* Code Section */}
-      <div className="overflow-x-auto text-sm">
-        <SyntaxHighlighter
-          language={language}
-          style={oneLight}
-          customStyle={{
-            margin: 0,
-            padding: "1rem",
-            backgroundColor: "#f9f9f9",
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
-      </div>
-    </div>
-  );
-}
 
 export default AIResponsePreview;
