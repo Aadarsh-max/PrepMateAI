@@ -6,6 +6,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 
 const CreateSessionForm = () => {
+  // Form data state
   const [formData, setFormData] = useState({
     role: "",
     experience: "",
@@ -13,11 +14,12 @@ const CreateSessionForm = () => {
     description: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [error, setError] = useState(null); // Error message state
 
   const navigate = useNavigate();
 
+  // Handle changes on inputs dynamically
   const handleChange = (key, value) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -25,6 +27,7 @@ const CreateSessionForm = () => {
     }));
   };
 
+  // On form submit: validate, call APIs, navigate
   const handleCreateSession = async (e) => {
     e.preventDefault();
 
@@ -38,7 +41,7 @@ const CreateSessionForm = () => {
     setIsLoading(true);
 
     try {
-      //Ai API to generate questions
+      // Call AI API to generate questions
       const aiResponse = await axiosInstance.post(
         API_PATHS.AI.GENERATE_QUESTIONS,
         {
@@ -51,12 +54,17 @@ const CreateSessionForm = () => {
 
       const generatedQuestions = aiResponse.data;
 
+      // Create a new session with generated questions
       const response = await axiosInstance.post(API_PATHS.SESSION.CREATE, {
         ...formData,
         questions: generatedQuestions,
       });
+
+      // If creation successful, navigate to the session page
       if (response.data?.session?._id) {
-        navigate(`/interview-prep/${response.data?.session?._id}`);
+        navigate(`/interview-prep/${response.data.session._id}`);
+      } else {
+        setError("Failed to create session. Please try again.");
       }
     } catch (error) {
       if (error.response && error.response.data.message) {
@@ -68,10 +76,11 @@ const CreateSessionForm = () => {
       setIsLoading(false);
     }
   };
+
   return (
     <div
       className="max-w-[750px] w-full mx-auto p-10 flex flex-col justify-center
-               bg-black rounded-xl shadow-md text-white border border-white"
+                 bg-black rounded-xl shadow-md text-white border border-white"
     >
       <h3 className="text-xl font-semibold text-white">
         Start a New Interview Journey
@@ -89,6 +98,7 @@ const CreateSessionForm = () => {
           placeholder="(e.g., Frontend Developer, UI/UX Designer, etc.)"
           type="text"
           className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-4 py-3 w-full"
+          required
         />
 
         <Input
@@ -97,7 +107,9 @@ const CreateSessionForm = () => {
           label="Years of Experience"
           placeholder="(e.g., 1 year, 3 years, 5+ years)"
           type="number"
+          min="0"
           className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-4 py-3 w-full"
+          required
         />
 
         <Input
@@ -107,6 +119,7 @@ const CreateSessionForm = () => {
           placeholder="(Comma-separated, e.g., React, Node.js, MongoDB)"
           type="text"
           className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-4 py-3 w-full"
+          required
         />
 
         <Input
@@ -123,7 +136,7 @@ const CreateSessionForm = () => {
         <button
           type="submit"
           className="w-full py-3 mt-4 font-semibold rounded-md bg-white text-black
-                   hover:bg-gray-200 transition flex justify-center items-center gap-2 cursor-pointer"
+                     hover:bg-gray-200 transition flex justify-center items-center gap-2 cursor-pointer"
           disabled={isLoading}
         >
           {isLoading && <SpinnerLoader />}

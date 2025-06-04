@@ -1,7 +1,12 @@
 import React from "react";
-import { AlertTriangle, Trash2, X } from "lucide-react";
+import { AlertTriangle, Trash2 } from "lucide-react";
 
 const DeleteAlertContent = ({ content, onDelete }) => {
+  const handleDelete = () => {
+    console.log("Deleting..."); 
+    onDelete(); 
+  };
+
   return (
     <div className="p-6 bg-black rounded-lg text-white border border-red-500/20 shadow-lg max-w-md mx-auto">
       <div className="flex items-center gap-3 mb-4">
@@ -19,7 +24,7 @@ const DeleteAlertContent = ({ content, onDelete }) => {
       <div className="flex justify-end">
         <button
           type="button"
-          onClick={onDelete}
+          onClick={handleDelete}
           className="px-4 py-2 rounded-md text-sm font-medium bg-red-600 hover:bg-red-700 text-white transition-all duration-200 cursor-pointer flex items-center gap-2 hover:shadow-lg hover:shadow-red-600/25"
         >
           <Trash2 size={16} />

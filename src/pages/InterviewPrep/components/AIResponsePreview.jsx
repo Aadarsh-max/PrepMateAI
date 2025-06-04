@@ -24,7 +24,7 @@ function CodeBlock({ code, language }) {
         </span>
         <button
           onClick={copyCode}
-          className="text-xs px-2 py-1 border border-gray-400 rounded hover:bg-gray-800 hover:text-white transition"
+          className="text-xs px-2 py-1 border border-gray-400 rounded text-white transition"
           aria-label="Copy code"
         >
           {copied ? "Copied" : "Copy"}
