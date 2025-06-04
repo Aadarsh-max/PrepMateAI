@@ -5,7 +5,6 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-// Move CodeBlock ABOVE the component that uses it
 function CodeBlock({ code, language }) {
   const [copied, setCopied] = useState(false);
 
@@ -24,7 +23,7 @@ function CodeBlock({ code, language }) {
         </span>
         <button
           onClick={copyCode}
-          className="text-xs px-2 py-1 border border-gray-400 rounded text-white transition"
+          className="text-xs px-2 py-1 border border-gray-400 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
           aria-label="Copy code"
         >
           {copied ? "Copied" : "Copy"}
