@@ -59,7 +59,7 @@ const Dashboard = () => {
           {sessions?.map((data) => (
             <SummaryCard
               key={data?._id}
-              colors="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
+              colors="bg-white border border-black rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
               role={data?.role || ""}
               topicsToFocus={data?.topicsToFocus || ""}
               experience={data?.experience || "-"}
@@ -83,7 +83,7 @@ const Dashboard = () => {
           className="fixed bottom-6 right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12 
                      h-14 w-14 md:h-16 md:w-auto md:px-6 
                      flex items-center justify-center gap-3
-                     bg-blue-600 hover:bg-blue-700 text-white 
+                     bg-black text-white 
                      text-sm font-semibold rounded-full
                      shadow-lg hover:shadow-xl transition-all duration-300 
                      z-50 cursor-pointer
@@ -101,7 +101,7 @@ const Dashboard = () => {
         isOpen={openCreateModal}
         onClose={() => setOpenCreateModal(false)}
         hideHeader
-        className="bg-white text-gray-900 rounded-xl shadow-xl mx-4 md:mx-0"
+        className="bg-white text-gray-900 rounded-xl shadow-xl mx-4 md:mx-0 border border-black"
       >
         <div className="max-w-md mx-auto px-6 py-8">
           <CreateSessionForm />
@@ -113,7 +113,7 @@ const Dashboard = () => {
         isOpen={openDeleteAlert?.open}
         onClose={() => setOpenDeleteAlert({ open: false, data: null })}
         title="Delete Session"
-        className="bg-white text-gray-900 rounded-xl shadow-xl mx-4 md:mx-0"
+        className="bg-black text-white rounded-xl shadow-xl mx-4 md:mx-0"
       >
         <div className="max-w-sm mx-auto px-6 py-6">
           <DeleteAlertContent
