@@ -10,14 +10,14 @@
 @layer base {
   html {
     font-family: var(--font-display);
-    background-color: #000000; /* Pure black background */
-    color: #ffffff; /* White text */
+    background-color: white; /* Pure black background */
+    color:black; /* White text */
   }
 
   body {
-    background-color: #000000; /* Pure black */
+    background-color: white; /* Pure black */
     overflow-x: hidden;
-    color: #ffffff; /* White text */
+    color: black; /* White text */
   }
 
   /* All buttons cursor pointer */

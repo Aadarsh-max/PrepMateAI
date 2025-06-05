@@ -77,7 +77,7 @@ return (
 
       <button
         className="fixed bottom-10 md:bottom-20 right-10 md:right-20 h-12 md:h-12 flex items-center justify-center gap-3
-                   bg-black text-white text-sm font-semibold px-6 py-2.5 rounded-full
+                   bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-full
                    shadow-md hover:bg-gray-800 transition duration-300 cursor-pointer"
         onClick={() => setOpenCreateModal(true)}
         aria-label="Add New Session"
