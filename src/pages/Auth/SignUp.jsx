@@ -62,83 +62,100 @@ const SignUp = ({ setCurrentPage }) => {
     }
   };
 
-  return (
-    <div
-      className="w-full md:w-[45vw] max-w-md p-7 flex flex-col justify-center
-               bg-black rounded-lg shadow-md mx-auto my-16 border border-white"
-    >
-      <h3 className="text-lg font-semibold text-white">Create an Account</h3>
-      <p className="text-xs text-gray-400 mt-1 mb-6">
-        Join us today by entering your details below.
-      </p>
+return (
+  <div
+    className="w-full md:w-[45vw] max-w-md p-7 flex flex-col justify-center
+               bg-white rounded-xl shadow-md mx-auto my-16 border border-gray-200"
+  >
+    <h3 className="text-lg font-semibold text-gray-900">Create an Account</h3>
+    <p className="text-xs text-gray-600 mt-1 mb-6">
+      Join us today by entering your details below.
+    </p>
 
-      <form onSubmit={handleSignUp}>
-        <div className="grid grid-cols-1 gap-4">
-          <Input
-            value={fullName}
-            onChange={({ target }) => setFullName(target.value)}
-            label="Full Name"
-            placeholder="John"
-            type="text"
-            className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-3 py-2"
-            disabled={isLoading}
-          />
-
-          <Input
-            value={email}
-            onChange={({ target }) => setEmail(target.value)}
-            label="Email Address"
-            placeholder="john@example.com"
-            type="text"
-            className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-3 py-2"
-            disabled={isLoading}
-          />
-
-          <Input
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-            label="Password"
-            placeholder="Min 8 Characters"
-            type="password"
-            className="text-white placeholder-gray-500 bg-black border border-gray-600 rounded-md px-3 py-2"
-            disabled={isLoading}
-          />
-        </div>
-
-        {error && <p className="text-red-500 text-xs pb-2.5 mt-2">{error}</p>}
-
-        <button
-          type="submit"
+    <form onSubmit={handleSignUp}>
+      <div className="grid grid-cols-1 gap-4">
+        <Input
+          value={fullName}
+          onChange={({ target }) => setFullName(target.value)}
+          label="Full Name"
+          placeholder="John"
+          type="text"
+          className="text-gray-900 placeholder-gray-400 bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-100"
           disabled={isLoading}
-          className="w-full py-2 mt-6 font-semibold rounded-md bg-white text-black hover:bg-gray-200 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-        >
-          {isLoading ? (
-            <>
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Signing Up...
-            </>
-          ) : (
-            "SIGN UP"
-          )}
-        </button>
+        />
 
-        <p className="text-sm text-gray-400 mt-3">
-          Already an account?{" "}
-          <button
-            className="font-medium underline cursor-pointer text-white hover:text-gray-200 transition disabled:opacity-50 disabled:cursor-not-allowed"
-            onClick={() => setCurrentPage("login")}
-            type="button"
-            disabled={isLoading}
-          >
-            Login
-          </button>
-        </p>
-      </form>
-    </div>
-  );
+        <Input
+          value={email}
+          onChange={({ target }) => setEmail(target.value)}
+          label="Email Address"
+          placeholder="john@example.com"
+          type="text"
+          className="text-gray-900 placeholder-gray-400 bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-100"
+          disabled={isLoading}
+        />
+
+        <Input
+          value={password}
+          onChange={({ target }) => setPassword(target.value)}
+          label="Password"
+          placeholder="Min 8 Characters"
+          type="password"
+          className="text-gray-900 placeholder-gray-400 bg-white border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-100"
+          disabled={isLoading}
+        />
+      </div>
+
+      {error && <p className="text-red-500 text-xs pb-2.5 mt-2">{error}</p>}
+
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="w-full py-2 mt-6 font-semibold rounded-md bg-black text-white hover:bg-gray-800 transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+      >
+        {isLoading ? (
+          <>
+            <svg
+              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Signing Up...
+          </>
+        ) : (
+          "SIGN UP"
+        )}
+      </button>
+
+      <p className="text-sm text-gray-600 mt-3">
+        Already have an account?{" "}
+        <button
+          className="font-medium underline cursor-pointer text-gray-800 hover:text-black transition disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={() => setCurrentPage("login")}
+          type="button"
+          disabled={isLoading}
+        >
+          Login
+        </button>
+      </p>
+    </form>
+  </div>
+);
+
 };
 
 export default SignUp;

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { LuCopy, LuCheck, LuCode } from "react-icons/lu";
+import { LuCopy, LuCheck } from "react-icons/lu";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+// Code block with copy button and light style
 function CodeBlock({ code, language }) {
   const [copied, setCopied] = useState(false);
 
@@ -24,13 +25,20 @@ function CodeBlock({ code, language }) {
         <button
           onClick={copyCode}
           className="text-xs px-2 py-1 border border-gray-400 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
-          aria-label="Copy code"
         >
-          {copied ? "Copied" : "Copy"}
+          {copied ? (
+            <span className="flex items-center gap-1">
+              <LuCheck className="inline" /> Copied
+            </span>
+          ) : (
+            <span className="flex items-center gap-1">
+              <LuCopy className="inline" /> Copy
+            </span>
+          )}
         </button>
       </div>
 
-      {/* Code Section */}
+      {/* Code section */}
       <div className="overflow-x-auto text-sm">
         <SyntaxHighlighter
           language={language}
@@ -48,11 +56,12 @@ function CodeBlock({ code, language }) {
   );
 }
 
+// AI Response Markdown Preview
 const AIResponsePreview = ({ content }) => {
   if (!content) return null;
   return (
-    <div className="max-w-4xl mx-auto bg-black text-white">
-      <div className="text-[14px] prose prose-invert max-w-none">
+    <div className="max-w-4xl mx-auto bg-white text-black">
+      <div className="text-[14px] prose max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -67,11 +76,10 @@ const AIResponsePreview = ({ content }) => {
                 <CodeBlock
                   code={String(children).replace(/\n$/, "")}
                   language={language}
-                  className="bg-white text-black rounded px-2 py-1 font-mono"
                 />
               ) : (
                 <code
-                  className="px-1 py-0.5 bg-white text-black rounded text-sm"
+                  className="px-1 py-0.5 bg-gray-200 text-black rounded text-sm"
                   {...props}
                 >
                   {children}
@@ -79,26 +87,26 @@ const AIResponsePreview = ({ content }) => {
               );
             },
             p({ children }) {
-              return <p className="mb-4 leading-6 text-white">{children}</p>;
+              return <p className="mb-4 leading-6 text-black">{children}</p>;
             },
             strong({ children }) {
               return (
-                <strong className="font-semibold text-white">{children}</strong>
+                <strong className="font-semibold text-black">{children}</strong>
               );
             },
             em({ children }) {
-              return <em className="italic text-gray-300">{children}</em>;
+              return <em className="italic text-gray-600">{children}</em>;
             },
             ul({ children }) {
               return (
-                <ul className="list-disc pl-6 space-y-2 my-4 text-white">
+                <ul className="list-disc pl-6 space-y-2 my-4 text-black">
                   {children}
                 </ul>
               );
             },
             ol({ children }) {
               return (
-                <ol className="list-decimal pl-6 space-y-2 my-4 text-white">
+                <ol className="list-decimal pl-6 space-y-2 my-4 text-black">
                   {children}
                 </ol>
               );
@@ -108,35 +116,35 @@ const AIResponsePreview = ({ content }) => {
             },
             blockquote({ children }) {
               return (
-                <blockquote className="border-l-4 border-white pl-4 italic my-4 text-gray-300">
+                <blockquote className="border-l-4 border-gray-400 pl-4 italic my-4 text-gray-600">
                   {children}
                 </blockquote>
               );
             },
             h1({ children }) {
               return (
-                <h1 className="text-2xl font-bold mt-6 mb-4 text-white">
+                <h1 className="text-2xl font-bold mt-6 mb-4 text-black">
                   {children}
                 </h1>
               );
             },
             h2({ children }) {
               return (
-                <h2 className="text-xl font-bold mt-6 mb-3 text-white">
+                <h2 className="text-xl font-bold mt-6 mb-3 text-black">
                   {children}
                 </h2>
               );
             },
             h3({ children }) {
               return (
-                <h3 className="text-lg font-bold mt-5 mb-2 text-white">
+                <h3 className="text-lg font-bold mt-5 mb-2 text-black">
                   {children}
                 </h3>
               );
             },
             h4({ children }) {
               return (
-                <h4 className="text-base font-bold mt-4 mb-2 text-white">
+                <h4 className="text-base font-bold mt-4 mb-2 text-black">
                   {children}
                 </h4>
               );
@@ -145,7 +153,7 @@ const AIResponsePreview = ({ content }) => {
               return (
                 <a
                   href={href}
-                  className="text-white underline hover:text-gray-300"
+                  className="text-blue-600 underline hover:text-blue-800"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -156,18 +164,18 @@ const AIResponsePreview = ({ content }) => {
             table({ children }) {
               return (
                 <div className="overflow-x-auto my-4">
-                  <table className="min-w-full divide-y divide-gray-700 border border-gray-700">
+                  <table className="min-w-full divide-y divide-gray-300 border border-gray-300">
                     {children}
                   </table>
                 </div>
               );
             },
             thead({ children }) {
-              return <thead className="bg-gray-900">{children}</thead>;
+              return <thead className="bg-gray-100">{children}</thead>;
             },
             tbody({ children }) {
               return (
-                <tbody className="divide-y divide-gray-700">{children}</tbody>
+                <tbody className="divide-y divide-gray-300">{children}</tbody>
               );
             },
             tr({ children }) {
@@ -175,34 +183,34 @@ const AIResponsePreview = ({ content }) => {
             },
             th({ children }) {
               return (
-                <th className="px-3 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
+                <th className="px-3 py-2 text-left text-xs font-medium text-black uppercase tracking-wider">
                   {children}
                 </th>
               );
             },
             td({ children }) {
               return (
-                <td className="px-3 py-2 whitespace-nowrap text-sm text-white">
+                <td className="px-3 py-2 whitespace-nowrap text-sm text-black">
                   {children}
                 </td>
               );
             },
             hr() {
-              return <hr className="my-6 border-white" />;
+              return <hr className="my-6 border-gray-300" />;
             },
             img({ src, alt }) {
               return (
                 <img
                   src={src}
                   alt={alt}
-                  className="my-4 max-w-full rounded border border-white"
+                  className="my-4 max-w-full rounded border border-gray-300"
                 />
               );
             },
             button({ children, ...props }) {
               return (
                 <button
-                  className="bg-white text-black px-3 py-1 rounded cursor-pointer hover:bg-gray-300"
+                  className="bg-gray-200 text-black px-3 py-1 rounded cursor-pointer hover:bg-gray-300"
                   {...props}
                 >
                   {children}
