@@ -147,69 +147,73 @@ const InterviewPrep = () => {
         }
       />
 
-      <div className="container mx-auto pt-4 pb-4 px-4 md:px-0">
-        <h2 className="text-lg font-semibold mb-6 text-white">
+      <div className="container mx-auto pt-4 pb-4 px-4 md:px-0 max-w-6xl">
+        <h2 className="text-lg font-semibold mb-6 text-white text-center">
           Interview Q & A
         </h2>
 
-        <div className="grid grid-cols-12 gap-4 mt-5 mb-10">
-          <div
-            className={`col-span-12 ${
-              openLeanMoreDrawer ? "md:col-span-7" : "md:col-span-8"
-            }`}
-          >
-            <AnimatePresence>
-              {sessionData?.questions?.map((data, index) => {
-                return (
-                  <motion.div
-                    key={data._id || index}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{
-                      duration: 0.4,
-                      type: "spring",
-                      stiffness: 100,
-                      delay: index * 0.1,
-                      damping: 15,
-                    }}
-                    layout
-                    layoutId={`question-${data._id || index}`}
-                  >
-                    <>
-                      <QuestionCard
-                        question={data?.question}
-                        answer={data?.answer}
-                        onLearnMore={() =>
-                          generateConceptExplanation(data.question)
-                        }
-                        isPinned={data?.isPinned}
-                        onTogglePin={() => toggleQuestionPinStatus(data._id)}
-                        // You can style QuestionCard internally as needed to match colors
-                      />
+        <div className="flex justify-center">
+          <div className="w-full max-w-4xl">
+            <div className="grid grid-cols-12 gap-4 mt-5 mb-10">
+              <div
+                className={`col-span-12 ${
+                  openLeanMoreDrawer ? "md:col-span-7" : "md:col-span-8"
+                } mx-auto`}
+              >
+                <AnimatePresence>
+                  {sessionData?.questions?.map((data, index) => {
+                    return (
+                      <motion.div
+                        key={data._id || index}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{
+                          duration: 0.4,
+                          type: "spring",
+                          stiffness: 100,
+                          delay: index * 0.1,
+                          damping: 15,
+                        }}
+                        layout
+                        layoutId={`question-${data._id || index}`}
+                      >
+                        <>
+                          <QuestionCard
+                            question={data?.question}
+                            answer={data?.answer}
+                            onLearnMore={() =>
+                              generateConceptExplanation(data.question)
+                            }
+                            isPinned={data?.isPinned}
+                            onTogglePin={() => toggleQuestionPinStatus(data._id)}
+                            // You can style QuestionCard internally as needed to match colors
+                          />
 
-                      {!isLoading &&
-                        sessionData?.questions?.length === index + 1 && (
-                          <div className="flex items-center justify-center mt-5">
-                            <button
-                              className="flex items-center gap-3 text-sm font-medium px-5 py-2 mr-2 rounded border border-white bg-white text-black cursor-pointer transition-colors duration-200 hover:bg-black hover:text-white"
-                              disabled={isLoading || isUpdateLoader}
-                              onClick={uploadMoreQuestions}
-                            >
-                              {isUpdateLoader ? (
-                                <SpinnerLoader />
-                              ) : (
-                                <LuListCollapse className="text-lg" />
-                              )}{" "}
-                              Load More
-                            </button>
-                          </div>
-                        )}
-                    </>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
+                          {!isLoading &&
+                            sessionData?.questions?.length === index + 1 && (
+                              <div className="flex items-center justify-center mt-5">
+                                <button
+                                  className="flex items-center gap-3 text-sm font-medium px-5 py-2 mr-2 rounded border border-white bg-white text-black cursor-pointer transition-colors duration-200 hover:bg-black hover:text-white"
+                                  disabled={isLoading || isUpdateLoader}
+                                  onClick={uploadMoreQuestions}
+                                >
+                                  {isUpdateLoader ? (
+                                    <SpinnerLoader />
+                                  ) : (
+                                    <LuListCollapse className="text-lg" />
+                                  )}{" "}
+                                  Load More
+                                </button>
+                              </div>
+                            )}
+                        </>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
         </div>
 
