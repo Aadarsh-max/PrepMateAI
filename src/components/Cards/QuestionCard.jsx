@@ -27,15 +27,15 @@ const QuestionCard = ({
     };
 return (
   <>
-    <div className="bg-black border border-white/10 rounded-lg mb-4 overflow-hidden py-4 px-5 shadow-sm group">
+    <div className="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden py-4 px-5 shadow-sm hover:shadow-md shadow-gray-200 group transition">
       <div className="flex items-start justify-between cursor-pointer">
         <div className="flex items-start gap-3.5">
-          <span className="text-xs md:text-sm font-semibold text-white leading-[18px]">
+          <span className="text-xs md:text-sm font-semibold text-gray-700 leading-[18px]">
             Q
           </span>
 
           <h3
-            className="text-xs md:text-sm font-medium text-white mr-0 md:mr-20"
+            className="text-xs md:text-sm font-medium text-gray-900 mr-0 md:mr-20"
             onClick={toggleExpand}
           >
             {question}
@@ -49,7 +49,7 @@ return (
             }`}
           >
             <button
-              className="flex items-center gap-2 text-xs font-medium text-white bg-black px-3 py-1 mr-2 rounded border border-white/20 hover:bg-white hover:text-black transition"
+              className="flex items-center gap-2 text-xs font-medium text-black bg-white px-3 py-1 mr-2 rounded border border-gray-300 hover:bg-gray-100 transition"
               onClick={onTogglePin}
             >
               {isPinned ? (
@@ -60,7 +60,7 @@ return (
             </button>
 
             <button
-              className="flex items-center gap-2 text-xs font-medium text-white bg-black px-3 py-1 mr-2 rounded border border-white/20 hover:bg-white hover:text-black transition"
+              className="flex items-center gap-2 text-xs font-medium text-black bg-white px-3 py-1 mr-2 rounded border border-gray-300 hover:bg-gray-100 transition"
               onClick={() => {
                 setIsExpanded(true);
                 onLearnMore();
@@ -72,7 +72,7 @@ return (
           </div>
 
           <button
-            className="text-white hover:text-gray-300 cursor-pointer transition-colors"
+            className="text-gray-500 hover:text-gray-700 cursor-pointer transition-colors"
             onClick={toggleExpand}
           >
             <LuChevronDown
@@ -91,7 +91,7 @@ return (
       >
         <div
           ref={contentRef}
-          className="mt-4 text-gray-300 bg-white/5 px-5 py-3 rounded-lg"
+          className="mt-4 text-gray-700 bg-gray-50 px-5 py-3 rounded-lg"
         >
           <AIResponsePreview content={answer} />
         </div>
@@ -99,6 +99,7 @@ return (
     </div>
   </>
 );
+
 
 
 }
