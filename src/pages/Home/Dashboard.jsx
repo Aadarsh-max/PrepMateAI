@@ -51,69 +51,79 @@ const Dashboard = () => {
     fetchAllSessions();
   }, []);
 
-return (
-  <DashboardLayout>
-    <div className="container mx-auto pt-4 pb-4 min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-7 pt-1 pb-6 px-4 md:px-0">
-        {sessions?.map((data) => (
-          <SummaryCard
-            key={data?._id}
-            colors="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition"
-            role={data?.role || ""}
-            topicsToFocus={data?.topicsToFocus || ""}
-            experience={data?.experience || "-"}
-            questions={data?.questions?.length || "-"}
-            description={data?.description || ""}
-            lastUpdated={
-              data?.updatedAt
-                ? moment(data.updatedAt).format("Do MMM YYYY")
-                : ""
-            }
-            onSelect={() => navigate(`/interview-prep/${data?._id}`)}
-            onDelete={() => setOpenDeleteAlert({ open: true, data })}
-          />
-        ))}
+  return (
+    <DashboardLayout>
+      <div className="container mx-auto pt-6 pb-8 min-h-screen">
+        {/* Main content with better spacing from borders */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 px-6 md:px-8 lg:px-12">
+          {sessions?.map((data) => (
+            <SummaryCard
+              key={data?._id}
+              colors="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
+              role={data?.role || ""}
+              topicsToFocus={data?.topicsToFocus || ""}
+              experience={data?.experience || "-"}
+              questions={data?.questions?.length || "-"}
+              description={data?.description || ""}
+              lastUpdated={
+                data?.updatedAt
+                  ? moment(data.updatedAt).format("Do MMM YYYY")
+                  : ""
+              }
+              onSelect={() => navigate(`/interview-prep/${data?._id}`)}
+              onDelete={() => setOpenDeleteAlert({ open: true, data })}
+              // Ensure delete button is visible on mobile
+              showDeleteOnMobile={true}
+            />
+          ))}
+        </div>
+
+        {/* Floating Action Button with better positioning */}
+        <button
+          className="fixed bottom-6 right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12 
+                     h-14 w-14 md:h-16 md:w-auto md:px-6 
+                     flex items-center justify-center gap-3
+                     bg-blue-600 hover:bg-blue-700 text-white 
+                     text-sm font-semibold rounded-full
+                     shadow-lg hover:shadow-xl transition-all duration-300 
+                     z-50 cursor-pointer
+                     border-2 border-white"
+          onClick={() => setOpenCreateModal(true)}
+          aria-label="Add New Session"
+        >
+          <LuPlus className="text-xl md:text-2xl" />
+          <span className="hidden md:inline">Add New</span>
+        </button>
       </div>
 
-      <button
-        className="fixed bottom-10 md:bottom-20 right-10 md:right-20 h-12 md:h-12 flex items-center justify-center gap-3
-                   bg-white text-black text-sm font-semibold px-6 py-2.5 rounded-full
-                   shadow-md hover:bg-gray-800 transition duration-300 cursor-pointer"
-        onClick={() => setOpenCreateModal(true)}
-        aria-label="Add New Session"
+      {/* Create Session Modal */}
+      <Modal
+        isOpen={openCreateModal}
+        onClose={() => setOpenCreateModal(false)}
+        hideHeader
+        className="bg-white text-gray-900 rounded-xl shadow-xl mx-4 md:mx-0"
       >
-        <LuPlus className="text-2xl" />
-        Add New
-      </button>
-    </div>
+        <div className="max-w-md mx-auto px-6 py-8">
+          <CreateSessionForm />
+        </div>
+      </Modal>
 
-    <Modal
-      isOpen={openCreateModal}
-      onClose={() => setOpenCreateModal(false)}
-      hideHeader
-      className="bg-white text-gray-900 rounded-xl shadow-md"
-    >
-      <div className="max-w-md mx-auto px-4 py-6">
-        <CreateSessionForm />
-      </div>
-    </Modal>
-
-    <Modal
-      isOpen={openDeleteAlert?.open}
-      onClose={() => setOpenDeleteAlert({ open: false, data: null })}
-      title="Delete Alert"
-      className="bg-white text-gray-900 rounded-xl shadow-md"
-    >
-      <div className="max-w-sm mx-auto px-4 py-6">
-        <DeleteAlertContent
-          content="Are you sure you want to delete this session detail?"
-          onDelete={() => deleteSession(openDeleteAlert.data)}
-        />
-      </div>
-    </Modal>
-  </DashboardLayout>
-);
-
+      {/* Delete Confirmation Modal */}
+      <Modal
+        isOpen={openDeleteAlert?.open}
+        onClose={() => setOpenDeleteAlert({ open: false, data: null })}
+        title="Delete Session"
+        className="bg-white text-gray-900 rounded-xl shadow-xl mx-4 md:mx-0"
+      >
+        <div className="max-w-sm mx-auto px-6 py-6">
+          <DeleteAlertContent
+            content="Are you sure you want to delete this session? This action cannot be undone."
+            onDelete={() => deleteSession(openDeleteAlert.data)}
+          />
+        </div>
+      </Modal>
+    </DashboardLayout>
+  );
 };
 
 export default Dashboard;
