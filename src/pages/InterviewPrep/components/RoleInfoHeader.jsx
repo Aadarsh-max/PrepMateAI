@@ -9,37 +9,75 @@ const RoleInfoHeader = ({
   lastUpdated,
 }) => {
   return (
-    <div className="bg-white text-black sticky top-0 z-50 shadow-sm border-b">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <div>
-            <h2 className="text-2xl font-bold">{role}</h2>
-            <p className="text-sm text-gray-600 mt-1">{topicsToFocus}</p>
+    <div className="bg-black relative text-white min-h-[220px]">
+      <div className="container mx-auto px-10 md:px-0 relative z-20">
+        <div className="h-[200px] flex flex-col justify-center">
+          <div className="flex items-start">
+            <div className="flex-grow">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h2
+                    className="text-3xl font-bold text-white"
+                    style={{
+                      background: "none",
+                      WebkitBackgroundClip: "unset",
+                      WebkitTextFillColor: "unset",
+                      // Removed gradient text
+                    }}
+                  >
+                    {role}
+                  </h2>
+                  <p className="text-sm text-gray-300 mt-1">{topicsToFocus}</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 text-xs font-medium">
-            <span
-              className="px-3 py-1 rounded-full bg-gray-100 text-black border cursor-default"
+          <div className="flex items-center gap-3 mt-4">
+            {/** Minimal black & white tags with pointer cursor */}
+            <div
+              className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-black cursor-pointer select-none"
               title="Experience"
             >
               Experience: {experience} {experience === 1 ? "Year" : "Years"}
-            </span>
+            </div>
 
-            <span
-              className="px-3 py-1 rounded-full bg-gray-100 text-black border cursor-default"
+            <div
+              className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-black cursor-pointer select-none"
               title="Questions and Answers"
             >
               {questions} Q&A
-            </span>
+            </div>
 
-            <span
-              className="px-3 py-1 rounded-full bg-gray-100 text-black border cursor-default"
-              title="Last Updated"
+            <div
+              className="text-xs font-semibold px-3 py-1 rounded-full bg-white text-black cursor-pointer select-none"
+              title="Last Updated Date"
             >
               Last Updated: {lastUpdated}
-            </span>
+            </div>
           </div>
         </div>
+      </div>
+
+      {/** Remove neon blobs for minimal design or keep subtle white blobs */}
+      {/* Optional minimal blobs */}
+      <div className="w-[40vw] md:w-[30vw] h-[200px] flex items-center justify-center bg-transparent overflow-hidden absolute top-0 right-0 pointer-events-none">
+        <div
+          className="w-20 h-20 rounded-full blur-[70px] opacity-10 bg-white"
+          style={{ animation: "blob1 7s infinite" }}
+        />
+        <div
+          className="w-20 h-20 rounded-full blur-[70px] opacity-10 bg-white"
+          style={{ animation: "blob2 7s infinite" }}
+        />
+        <div
+          className="w-16 h-16 rounded-full blur-[60px] opacity-5 bg-white"
+          style={{ animation: "blob3 7s infinite" }}
+        />
+        <div
+          className="w-16 h-16 rounded-full blur-[60px] opacity-5 bg-white"
+          style={{ animation: "blob4 7s infinite" }}
+        />
       </div>
     </div>
   );
