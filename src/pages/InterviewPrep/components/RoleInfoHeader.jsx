@@ -9,7 +9,7 @@ const RoleInfoHeader = ({
   lastUpdated,
 }) => {
   return (
-    <div className="bg-black relative text-white min-h-[220px]">
+    <div className="bg-white relative text-black min-h-[220px]">
       <div className="container mx-auto px-10 md:px-0 relative z-20">
         <div className="h-[200px] flex flex-col justify-center">
           <div className="flex items-start">
@@ -22,7 +22,6 @@ const RoleInfoHeader = ({
                       background: "none",
                       WebkitBackgroundClip: "unset",
                       WebkitTextFillColor: "unset",
-                      // Removed gradient text
                     }}
                   >
                     {role}
@@ -59,8 +58,6 @@ const RoleInfoHeader = ({
         </div>
       </div>
 
-      {/** Remove neon blobs for minimal design or keep subtle white blobs */}
-      {/* Optional minimal blobs */}
       <div className="w-[40vw] md:w-[30vw] h-[200px] flex items-center justify-center bg-transparent overflow-hidden absolute top-0 right-0 pointer-events-none">
         <div
           className="w-20 h-20 rounded-full blur-[70px] opacity-10 bg-white"

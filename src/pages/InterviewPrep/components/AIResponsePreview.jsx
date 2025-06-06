@@ -5,7 +5,6 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-// Code block with copy button and light style
 function CodeBlock({ code, language }) {
   const [copied, setCopied] = useState(false);
 
