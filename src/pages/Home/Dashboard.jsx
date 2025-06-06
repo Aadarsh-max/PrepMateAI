@@ -54,7 +54,6 @@ const Dashboard = () => {
   return (
     <DashboardLayout>
       <div className="container mx-auto pt-6 pb-8 min-h-screen">
-        {/* Main content with better spacing from borders */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 px-6 md:px-8 lg:px-12">
           {sessions?.map((data) => (
             <SummaryCard
@@ -72,13 +71,11 @@ const Dashboard = () => {
               }
               onSelect={() => navigate(`/interview-prep/${data?._id}`)}
               onDelete={() => setOpenDeleteAlert({ open: true, data })}
-              // Ensure delete button is visible on mobile
               showDeleteOnMobile={true}
             />
           ))}
         </div>
 
-        {/* Floating Action Button with better positioning */}
         <button
           className="fixed bottom-6 right-6 md:bottom-8 md:right-8 lg:bottom-12 lg:right-12 
                      h-14 w-14 md:h-16 md:w-auto md:px-6 
@@ -96,7 +93,6 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* Create Session Modal */}
       <Modal
         isOpen={openCreateModal}
         onClose={() => setOpenCreateModal(false)}
@@ -108,7 +104,6 @@ const Dashboard = () => {
         </div>
       </Modal>
 
-      {/* Delete Confirmation Modal */}
       <Modal
         isOpen={openDeleteAlert?.open}
         onClose={() => setOpenDeleteAlert({ open: false, data: null })}

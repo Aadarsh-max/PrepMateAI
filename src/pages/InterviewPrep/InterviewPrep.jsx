@@ -147,18 +147,18 @@ const InterviewPrep = () => {
         }
       />
 
-      <div className="container mx-auto pt-4 pb-4 px-4 md:px-0 max-w-6xl">
+      <div className="container mx-auto pt-4 pb-4 px-4 md:px-0 max-w-6xl overflow-hidden">
         <h2 className="text-lg font-semibold mb-6 text-white text-center">
           Interview Q & A
         </h2>
 
-        <div className="flex justify-center">
-          <div className="w-full max-w-4xl">
+        <div className="flex justify-center w-full">
+          <div className="w-full max-w-4xl px-2 sm:px-4">
             <div className="grid grid-cols-12 gap-4 mt-5 mb-10">
               <div
                 className={`col-span-12 ${
                   openLeanMoreDrawer ? "md:col-span-7" : "md:col-span-8"
-                } mx-auto`}
+                } mx-auto w-full`}
               >
                 <AnimatePresence>
                   {sessionData?.questions?.map((data, index) => {
@@ -177,37 +177,35 @@ const InterviewPrep = () => {
                         }}
                         layout
                         layoutId={`question-${data._id || index}`}
+                        className="w-full break-words"
                       >
-                        <>
-                          <QuestionCard
-                            question={data?.question}
-                            answer={data?.answer}
-                            onLearnMore={() =>
-                              generateConceptExplanation(data.question)
-                            }
-                            isPinned={data?.isPinned}
-                            onTogglePin={() => toggleQuestionPinStatus(data._id)}
-                            // You can style QuestionCard internally as needed to match colors
-                          />
+                        <QuestionCard
+                          question={data?.question}
+                          answer={data?.answer}
+                          onLearnMore={() =>
+                            generateConceptExplanation(data.question)
+                          }
+                          isPinned={data?.isPinned}
+                          onTogglePin={() => toggleQuestionPinStatus(data._id)}
+                        />
 
-                          {!isLoading &&
-                            sessionData?.questions?.length === index + 1 && (
-                              <div className="flex items-center justify-center mt-5">
-                                <button
-                                  className="flex items-center gap-3 text-sm font-medium px-5 py-2 mr-2 rounded border border-white bg-white text-black cursor-pointer transition-colors duration-200 hover:bg-black hover:text-white"
-                                  disabled={isLoading || isUpdateLoader}
-                                  onClick={uploadMoreQuestions}
-                                >
-                                  {isUpdateLoader ? (
-                                    <SpinnerLoader />
-                                  ) : (
-                                    <LuListCollapse className="text-lg" />
-                                  )}{" "}
-                                  Load More
-                                </button>
-                              </div>
-                            )}
-                        </>
+                        {!isLoading &&
+                          sessionData?.questions?.length === index + 1 && (
+                            <div className="flex items-center justify-center mt-5">
+                              <button
+                                className="flex items-center gap-3 text-sm font-medium px-5 py-2 mr-2 rounded border border-white bg-white text-black cursor-pointer transition-colors duration-200 hover:bg-black hover:text-white"
+                                disabled={isLoading || isUpdateLoader}
+                                onClick={uploadMoreQuestions}
+                              >
+                                {isUpdateLoader ? (
+                                  <SpinnerLoader />
+                                ) : (
+                                  <LuListCollapse className="text-lg" />
+                                )}
+                                Load More
+                              </button>
+                            </div>
+                          )}
                       </motion.div>
                     );
                   })}
