@@ -1,12 +1,40 @@
-# React + Vite
+# 🚀 PrepMateAI – AI-Powered Interview Preparation App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**PrepMateAI** is your smart, AI-driven interview preparation coach, powered by **Google's Gemini AI**. Designed for job seekers and developers, it offers a personalized, interactive experience tailored to your career goals, role, and skill level.
 
-Currently, two official plugins are available:
+## 🔍 About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+PrepMateAI intelligently generates interview questions and detailed answers based on your **job role**, **experience level**, and **chosen topics**. Whether you're a fresher or a seasoned professional, PrepMateAI adapts to your needs and helps you prepare with confidence.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 💡 Key Features
+
+- 🎯 **Role & Experience-Based Questions**  
+  Tailored questions based on your job profile and experience.
+
+- 📚 **Topic Selection**  
+  Focus on specific technologies, domains, or subjects you want to master.
+
+- 🤖 **AI-Generated Q&As**  
+  Get well-structured, Gemini AI-crafted answers with **code snippets** and explanations.
+
+- 📌 **Pin Important Questions**  
+  Save and highlight critical Q&As for quick access later.
+
+- 💾 **Session Saving**  
+  Automatically save your Q&A sessions and revisit them anytime.
+
+- 📖 **"Learn More" Button**  
+  Instantly get deeper insights or follow-up explanations for any topic.
+
+---
+
+## 🌐 Tech Stack
+
+- **Frontend:** React (or relevant framework if different)
+- **Backend:** Node.js / Express (if applicable)
+- **AI Engine:** Gemini (Google AI)
+- **Storage:** Local/session storage or database (if implemented)
+
+---
